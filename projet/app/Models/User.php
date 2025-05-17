@@ -12,7 +12,6 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-   
     protected $fillable = [
         'fullname',
         'email',
@@ -38,4 +37,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function meetingUsers()
+{
+    return $this->hasMany(MeetingMember::class, 'user_id');
+}
+
+public function associationMeetingUsers()
+{
+    return $this->hasMany(MeetingMember::class, 'association_name', 'name_assotiation');
+}
 }

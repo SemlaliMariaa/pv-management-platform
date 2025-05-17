@@ -14,23 +14,27 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 // Protected routes
 Route::middleware('auth')->group(function () {
-
     Route::middleware('role:admin')->prefix('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
-    Route::get('/admin/pending-users', [AdminController::class, 'pendingUsers'])->name('admin.pendingUsers');
-    Route::post('/admin/approve-user/{id}', [AdminController::class, 'approveUser'])->name('admin.approveUser');
-    Route::post('/admin/reject-user/{id}', [AdminController::class, 'rejectUser'])->name('admin.rejectUser');
+        Route::get('/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
+        Route::get('/admin/pending-users', [AdminController::class, 'pendingUsers'])->name('admin.pendingUsers');
+        Route::post('/admin/approve-user/{id}', [AdminController::class, 'approveUser'])->name('admin.approveUser');
+        Route::post('/admin/reject-user/{id}', [AdminController::class, 'rejectUser'])->name('admin.rejectUser');
     });
 
     // user
     Route::middleware('role:user')->prefix('user')->group(function () {
-            Route::get('/dashboard',[UserController::class,'showMeetingNote'])->name('user.dashboard');
-            
-Route::get('/needs', [UserController::class, 'index'])->name('needs.index');
-Route::post('/needs/store', [UserController::class, 'storeNeeds'])->name('needs.store');
-Route::put('/needs/{id}', [UserController::class, 'update'])->name('needs.update');
-Route::delete('/needs/{id}', [UserController::class, 'destroy'])->name('needs.destroy');
+        Route::get('/dashboard',[UserController::class,'showMeetingNote'])->name('user.dashboard');
+        // meetings_users
+        Route::post('/meeting-members', [UserController::class, 'storeM'])->name('meeting-members.store');
+        Route::get('/meeting-members', [UserController::class, 'indexM'])->name('meetings.index');
+        Route::get('/meeting-members/{meetingMember}', [UserController::class, 'editM'])->name('meeting-members.edit');
+        Route::patch('/meeting-members/{meetingMember}', [UserController::class, 'updateM'])->name('meeting-members.update');
+        Route::delete('/meeting-members/{meetingMember}', [UserController::class, 'destroyM'])->name('meeting-members.destroy');
+        // gestion needs
+// routes/web.php
+Route::get('/needs', [UserController::class, 'indexN'])->name('needs.index');
+        Route::post('/needs', [UserController::class, 'storeNeeds'])->name('needs.store');
+        Route::post('/needs/update/{id}', [UserController::class, 'updateN'])->name('needs.update');
+        Route::delete('/needs/delete/{id}', [UserController::class, 'destroyN'])->name('needs.destroy');
     });
 });

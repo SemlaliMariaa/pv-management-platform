@@ -11,9 +11,10 @@ class Need extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number',
-        'description',
-        'quantity_required',
-    ];
+    'description',
+    'quantity_required',
+    'number'
+];
+
 }
 

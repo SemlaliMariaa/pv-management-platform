@@ -12,11 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meeting_users', function (Blueprint $table) {
-            $table->id();
-        $table->string('fullname');       // الاسم الكامل
-        $table->string('role');           // الدور
-        $table->string('signature')->nullable(); // التوقيع (رابط صورة مثلاً)، nullable يعني مشي ضروري
-        $table->timestamps();
+           $table->id();
+    $table->string('fullname');
+    $table->string('role');
+    $table->string('signature')->nullable();
+    $table->string('association_name'); 
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->timestamps();
+    
+    // Index pour améliorer les performances
+    $table->index('association_name');
         });
     }
 
