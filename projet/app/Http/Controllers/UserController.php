@@ -148,28 +148,35 @@ public function destroyM(MeetingMember $meetingMember)
 
 // gestion needs 
 // app/Http/Controllers/UserController.php
-public function indexN()
+
+    public function index()
     {
         $needs = Need::all();
         return view('user.dashboard', compact('needs'));
     }
 
-   public function storeNeeds(Request $request)
-{
-    $validated = $request->validate([
-        'description' => 'required|string|max:255',
-        'quantity_required' => 'required|integer|min:1',
-    ]);
+    public function storeNeeds(Request $request)
+    {
+        $request->validate([
+            'description.*' => 'required|string|max:255',
+            'quantity_required.*' => 'required|integer|min:1',
+        ]);
 
-    $need = Need::create([
-        'description' => $validated['description'],
-        'quantity_required' => $validated['quantity_required'],
-        'number' => Need::max('number') + 1,
-    ]);
+        $descriptions = $request->description;
+        $quantities = $request->quantity_required;
 
-    return response()->json(['success' => true, 'message' => 'تم الحفظ بنجاح']);
-}
-    public function updateN(Request $request, $id)
+        foreach ($descriptions as $index => $desc) {
+            Need::create([
+                'description' => $desc,
+                'quantity_required' => $quantities[$index],
+                'number' => Need::max('number') ? Need::max('number') + 1 : 1,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'تمت إضافة الحاجيات بنجاح!');
+    }
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'description' => 'required|string|max:255',
@@ -185,14 +192,11 @@ public function indexN()
         return redirect()->route('needs.index')->with('success', 'تم تعديل الحاجة بنجاح!');
     }
 
-    public function destroyN($id)
+    public function destroy($id)
     {
         $need = Need::findOrFail($id);
         $need->delete();
 
         return redirect()->route('needs.index')->with('success', 'تم حذف الحاجة بنجاح!');
     }
-}
-
-
-
+} 

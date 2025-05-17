@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,10 +10,8 @@ class Need extends Model
     use HasFactory;
 
     protected $fillable = [
-    'description',
-    'quantity_required',
-    'number'
-];
-
-}
-
+        'number',
+        'description',
+        'quantity_required',
+    ];
+};

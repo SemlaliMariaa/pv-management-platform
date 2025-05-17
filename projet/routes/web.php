@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:user')->prefix('user')->group(function () {
         Route::get('/dashboard',[UserController::class,'showMeetingNote'])->name('user.dashboard');
         // meetings_users
+        Route::get('/meeting-members/create', [UserController::class, 'create'])->name('meeting-members.create');
+
         Route::post('/meeting-members', [UserController::class, 'storeM'])->name('meeting-members.store');
         Route::get('/meeting-members', [UserController::class, 'indexM'])->name('meetings.index');
         Route::get('/meeting-members/{meetingMember}', [UserController::class, 'editM'])->name('meeting-members.edit');
