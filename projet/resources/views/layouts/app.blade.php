@@ -239,10 +239,6 @@
                     <span class="nav-text">طلبات الانضمام</span>
                 </a>
                 
-                <a href="{{ route('admin.users') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
-                    <i class="fas fa-user-cog"></i>
-                    <span class="nav-text">إدارة الأعضاء</span>
-                </a>
             @endif
         </div>
 

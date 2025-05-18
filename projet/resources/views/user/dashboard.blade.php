@@ -155,6 +155,7 @@
                                             <span>الاسم الكامل:</span>
                                         </label>
                                         <div class="relative">
+                                            <input type="hidden" name="mahdar_id" value="{{ $mahdar->id }}">
                                             <input type="text" name="members[{{ $i }}][fullname]" 
                                                 class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 pr-10"
                                                 value="{{ old("members.$i.fullname") }}">
@@ -230,6 +231,8 @@
                                 </thead>
                                 <tbody id="needsTableBody" class="text-gray-700 divide-y divide-gray-200">
                                     <!-- Rows added dynamically -->
+                        <input type="hidden" name="mahdar_id" value="{{ $mahdar->id }}">
+
                                 </tbody>
                             </table>
                         </div>

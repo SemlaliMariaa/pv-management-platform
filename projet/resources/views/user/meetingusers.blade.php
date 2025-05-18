@@ -39,7 +39,6 @@
                         <th scope="col" class="px-8 py-4 text-right text-sm font-semibold text-gray-700 uppercase tracking-wider">#</th>
                         <th scope="col" class="px-8 py-4 text-right text-sm font-semibold text-gray-700 uppercase tracking-wider">الاسم الكامل</th>
                         <th scope="col" class="px-8 py-4 text-right text-sm font-semibold text-gray-700 uppercase tracking-wider">الدور</th>
-                        <th scope="col" class="px-8 py-4 text-right text-sm font-semibold text-gray-700 uppercase tracking-wider">الجمعية</th>
                         <th scope="col" class="px-8 py-4 text-right text-sm font-semibold text-gray-700 uppercase tracking-wider">الإجراءات</th>
                     </tr>
                 </thead>
@@ -71,9 +70,7 @@
                                 {{ $member->role }}
                             </span>
                         </td>
-                        <td class="px-8 py-5 whitespace-nowrap text-sm text-gray-600">
-                            {{ $member->name_assotiation ?? '--' }}
-                        </td>
+                        
                         <td class="px-8 py-5 whitespace-nowrap text-sm font-medium">
                             <div class="flex justify-end space-x-3 space-x-reverse">
                                 <a href="{{ route('meeting-members.edit', $member->id) }}" 

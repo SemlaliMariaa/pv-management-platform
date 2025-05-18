@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'fullname',
@@ -18,33 +15,21 @@ class User extends Authenticatable
         'password',
         'telephone',
         'address',
-        'name_assotiation',
+        'name_association',
         'role',
         'roleuser',
+        'is_approved'
     ];
 
-    // إخفاء الحقول اللي ما بغيناش تبان في JSON مثلاً
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-   
-    protected function casts(): array
+    // Relation avec les PVs créés
+    public function mahdars()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Mahdar::class);
     }
 
-    public function meetingUsers()
-{
-    return $this->hasMany(MeetingMember::class, 'user_id');
-}
-
-public function associationMeetingUsers()
-{
-    return $this->hasMany(MeetingMember::class, 'association_name', 'name_assotiation');
-}
+    // Relation avec les participations aux réunions
+    public function meetingParticipations()
+    {
+        return $this->hasMany(MeetingMember::class);
+    }
 }

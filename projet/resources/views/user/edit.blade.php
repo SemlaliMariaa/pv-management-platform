@@ -23,12 +23,15 @@
             <form method="POST" action="{{ route('meeting-members.update', $meetingMember->id) }}">
                 @csrf
                 @method('PATCH')
-
+{{-- <input type="hidden" name="user_id" value="{{ $need->user_id ?? auth()->id() }}">
+    <!-- Champ caché pour mahdar_id -->
+<input type="hidden" name="mahdar_id" value="{{ $need->mahdar_id }}"> --}}
                 <div class="p-8 space-y-8">
                     <!-- Personal Info Section -->
                     <div class="space-y-6">
                         <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 border-gray-200">المعلومات الشخصية</h2>
-                        
+                        <input type="hidden" name="mahdar_id" value="{{ $meetingMember->mahdar_id }}">
+
                         <!-- Fullname Input -->
                         <div class="space-y-3">
                             <label for="fullname" class="block text-sm font-medium text-gray-700">
@@ -40,6 +43,7 @@
                                 </span>
                                 <span class="text-red-500 text-xs">* مطلوب</span>
                             </label>
+
                             <div class="relative">
                                 <input type="text" id="fullname" name="fullname" value="{{ old('fullname', $meetingMember->fullname) }}" 
                                        class="w-full px-5 py-3 text-base leading-6 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none shadow-sm text-right"
@@ -108,38 +112,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Association Input -->
-                            <div class="space-y-3">
-                                <label for="association_name" class="block text-sm font-medium text-gray-700">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
-                                        </svg>
-                                        الجمعية
-                                    </span>
-                                </label>
-                                <div class="relative">
-                                    <input type="text" id="association_name" name="association_name" 
-                                           value="{{ old('association_name', $meetingMember->association_name) }}"
-                                           class="w-full px-5 py-3 text-base leading-6 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 outline-none shadow-sm text-right"
-                                           placeholder="أدخل اسم الجمعية">
-                                    @error('association_name')
-                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <svg class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    @enderror
-                                </div>
-                                @error('association_name')
-                                    <p class="mt-2 text-sm text-red-600 flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                        </svg>
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

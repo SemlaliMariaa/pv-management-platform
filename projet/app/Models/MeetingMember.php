@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class MeetingMember extends Model
 {
-    protected $table = 'meeting_users'; 
-    protected $fillable = ['fullname', 'role', 'signature','user_id',
-        'association_name'];
+     protected $fillable = [
+        'mahdar_id',
+        'user_id',
+        'fullname',
+        'role',
+        'signature'
+    ];
+protected $table = 'meeting_users';
+    // Relation avec le PV
+    public function mahdar()
+    {
+        return $this->belongsTo(Mahdar::class);
+    }
 
-
+    // Relation avec l'utilisateur
     public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
-public function association()
-{
-    return $this->belongsTo(User::class, 'association_name', 'name_assotiation');
-}
+    {
+        return $this->belongsTo(User::class);
+    }
 }

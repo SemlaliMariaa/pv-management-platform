@@ -9,9 +9,17 @@ class Need extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+   protected $fillable = [
+        'mahdar_id',
+        'user_id',
         'number',
         'description',
-        'quantity_required',
+        'quantity_required'
     ];
+
+    // Relation avec le PV
+    public function mahdar()
+    {
+        return $this->belongsTo(Mahdar::class);
+    }
 };

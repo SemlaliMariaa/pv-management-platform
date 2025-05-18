@@ -18,7 +18,7 @@ return new class extends Migration
         $table->string('password');
         $table->string('telephone');
         $table->string('address')->nullable();
-        $table->string('name_assotiation');
+        $table->string('name_association');
         $table->enum('role', ['admin', 'user'])->default('user');
         $table->enum('roleuser', ['رئيس(ة) الجمعية', 'كاتب(ة) الجمعية', 'أمين(ة) الجمعية', 'عضو الجمعية'])->nullable();
         $table->boolean('is_approved')->default(false);
@@ -31,7 +31,7 @@ DB::table('users')->insert([
     'password' => Hash::make('rachid@2025'),
     'telephone' => '0600000000',
     'address' => 'عنوان الأدمن',
-    'name_assotiation' => 'جمعية الأدمن',
+    'name_association' => 'جمعية الأدمن',
     'role' => 'admin',
     'is_approved'=>true,
     'created_at' => now(),
