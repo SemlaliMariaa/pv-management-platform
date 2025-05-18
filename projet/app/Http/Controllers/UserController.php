@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -272,5 +273,31 @@ public function createOrGetMahdar()
     ]);
 
     return $mahdar;
+}
+
+
+public function synthese(Mahdar $mahdar)
+{
+    // Chargement des relations
+    $mahdar->load(['needs', 'participants', 'user']);
+    
+    return view('user.pdfb', compact('mahdar'));
+}
+
+
+
+
+public function exportPdf(Mahdar $mahdar) {
+    $pdf = Pdf::loadView('user.pdf', [
+        'mahdar' => $mahdar,
+        'arabicFont' => true
+    ]);
+    
+    // Critical DOMPDF settings
+    $pdf->setOption('defaultFont', 'Amiri');
+    $pdf->setOption('isRemoteEnabled', true); // Allows loading Google Fonts
+    $pdf->setOption('isHtml5ParserEnabled', true);
+    
+    return $pdf->download('محضر-اجتماع-' . $mahdar->id . '.pdf');
 }
 }

@@ -257,6 +257,14 @@
                 <p>جميع الحقوق محفوظة &copy; جمعية دعم مدرسة {{$user->name_assotiation}} - {{ date('Y') }}</p>
             </div>
         </div>
+        <div class="text-left mt-4">
+    <a href="{{ route('mahdars.export-pdf', $mahdar->id) }}" 
+       class="btn btn-primary" 
+       style="background-color: #4e73df; border-color: #4e73df;">
+       <i class="fas fa-file-pdf mr-2"></i>
+       {{ __('طباعة PDF') }} <!-- Texte en arabe -->
+    </a>
+</div>
     </div>
 
     <script>

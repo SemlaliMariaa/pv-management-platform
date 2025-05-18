@@ -33,10 +33,16 @@ Route::middleware('auth')->group(function () {
         Route::patch('/meeting-members/{meetingMember}', [UserController::class, 'updateM'])->name('meeting-members.update');
         Route::delete('/meeting-members/{meetingMember}', [UserController::class, 'destroyM'])->name('meeting-members.destroy');
         // gestion needs
-// routes/web.php
+
 Route::get('/needs', [UserController::class, 'indexN'])->name('needs.index');
         Route::post('/needs', [UserController::class, 'storeNeeds'])->name('needs.store');
         Route::post('/needs/update/{id}', [UserController::class, 'updateN'])->name('needs.update');
         Route::delete('/needs/delete/{id}', [UserController::class, 'destroyN'])->name('needs.destroy');
+
+// pdf
+Route::get('/mahdars/{mahdar}/synthese', [UserController::class, 'synthese'])
+     ->name('mahdars.synthese');
+     Route::get('/mahdars/{mahdar}/pdf', [UserController::class, 'exportPdf'])
+     ->name('mahdars.export-pdf');
     });
 });
