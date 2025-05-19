@@ -1,6 +1,16 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
 
-@section('content')
 <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
     <div class="w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden">
         <!-- En-tête avec dégradé -->
@@ -108,4 +118,5 @@
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>

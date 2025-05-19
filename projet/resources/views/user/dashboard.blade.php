@@ -39,6 +39,26 @@
         .animate-hover:hover {
             transform: translateY(-2px);
         }
+        
+        .final-report-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .final-report-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
     </style>
 </head>
 
@@ -46,7 +66,7 @@
     @extends('layouts.app')
 
     @section('content')
-        <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex justify-center">
+        <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
             <div class="w-full max-w-7xl bg-white rounded-2xl shadow-soft overflow-hidden animate-hover">
 
                 <!-- Header Association - Version améliorée -->
@@ -282,27 +302,15 @@
                     <p>جميع الحقوق محفوظة &copy; جمعية دعم مدرسة {{$user->name_assotiation}} - {{ date('Y') }}</p>
                 </div>
             </div>
-            <div class="text-left mt-4">
-                <!-- بعد نهاية form الحاجيات -->
-                <div class="mt-8 text-center">
-                    <a href="{{ route('meeting.report') }}"
-                        class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 flex items-center gap-2 animate-hover shadow-md inline-flex justify-center">
-                        <i class="fas fa-file-alt"></i>
-                        <span>إنشاء المحضر النهائي</span>
-                    </a>
-                </div>
+            
+            <!-- Bouton "إنشاء المحضر النهائي" -->
+            <div class="mt-8 w-full max-w-7xl text-center">
+                <a href="{{ route('meeting.report') }}" class="final-report-btn">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>إنشاء المحضر النهائي</span>
+                </a>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="text-left mt-4">
-    <a href="{{route('pdf')}}">pfeeeeeeeeeeeeeee
-    </a>
-<br><br>
-    
-</div>
-    </div>
-=======
->>>>>>> 2afd3871931f419d18cc36cbacc49bf2fbb9e409
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
