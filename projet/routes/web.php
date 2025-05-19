@@ -40,9 +40,11 @@ Route::get('/needs', [UserController::class, 'indexN'])->name('needs.index');
         Route::delete('/needs/delete/{id}', [UserController::class, 'destroyN'])->name('needs.destroy');
 
 // pdf
-Route::get('/mahdars/{mahdar}/synthese', [UserController::class, 'synthese'])
-     ->name('mahdars.synthese');
-     Route::get('/mahdars/{mahdar}/pdf', [UserController::class, 'exportPdf'])
-     ->name('mahdars.export-pdf');
+
+    //  Route::get('/mahdars/{mahdar}/pdf', [UserController::class, 'exportPdf'])
+    //  ->name('mahdars.export-pdf');
+     Route::get('/test-pdf-arabe', [UserController::class, 'generateArabicPDF'])->name('pdf');
+     Route::get('/generate-arabic-pdf', [UserController::class, 'generateArabicPDF'])->name('p');
+
     });
 });

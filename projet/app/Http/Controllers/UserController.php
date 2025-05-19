@@ -155,25 +155,6 @@ public function storeM(Request $request)
 
         return back()->with('success', 'تم تسجيل المحضر والأعضاء بنجاح');
     }
-// public function updateM(Request $request, MeetingMember $meetingMember)
-// {
-//     $validated = $request->validate([
-//         'user_id' => 'nullable|exists:users,id',
-//         'fullname' => 'required|string|max:255',
-//         'role' => 'required|string|max:255',
-//         'existing_signature' => 'nullable|string', // Champ caché pour la signature existante
-//     ]);
-
-//     // Si une signature existante a été envoyée (via le champ caché)
-//     if ($request->has('existing_signature')) {
-//         $validated['signature'] = $request->existing_signature;
-//     }
-
-//     $meetingMember->update($validated);
-
-//     return redirect()->route('meetings.index')
-//         ->with('success', 'Participant mis à jour avec succès.');
-// }
 
 public function updateM(Request $request, MeetingMember $meetingMember)
 {
@@ -213,9 +194,6 @@ public function destroyM(MeetingMember $meetingMember)
     return redirect()->route('meetings.index')
         ->with('success', 'Participant supprimé avec succès.');
 }
-
-// gestion needs 
-// app/Http/Controllers/UserController.php
 
     public function index()
     {
@@ -276,28 +254,56 @@ public function createOrGetMahdar()
 }
 
 
-public function synthese(Mahdar $mahdar)
+// public function exportPdf(Mahdar $mahdar) {
+//     $pdf = Pdf::loadView('user.pdf', [
+//         'mahdar' => $mahdar,
+//         'arabicFont' => true
+//     ]);
+    
+//     // Critical DOMPDF settings
+//     $pdf->setOption('defaultFont', 'Amiri');
+//     $pdf->setOption('isRemoteEnabled', true); // Allows loading Google Fonts
+//     $pdf->setOption('isHtml5ParserEnabled', true);
+    
+//     return $pdf->download('محضر-اجتماع-' . $mahdar->id . '.pdf');
+// }
+
+
+
+public function generateArabicPDF()
 {
-    // Chargement des relations
-    $mahdar->load(['needs', 'participants', 'user']);
-    
-    return view('user.pdfb', compact('mahdar'));
+    $data = [
+        'title' => 'نموذج تجريبي',
+        'content' => 'هذا مثال لنص عربي في ملف PDF باستخدام Laravel و DomPDF.',
+        'date' => now()->format('Y-m-d'),
+    ];
+
+    $pdf = Pdf::loadView('user.pdfb', $data)
+        ->setPaper('A4', 'portrait')
+        ->setOption('defaultFont', 'Amiri')
+        ->setOption('isHtml5ParserEnabled', true)
+        ->setOption('isRemoteEnabled', true)
+        ->setOption('isFontSubsettingEnabled', true)
+        ->setOption('isPhpEnabled', true);
+
+    return $pdf->stream('document_arabe.pdf');
 }
 
+//    public function generateArabicPDF()
+//     {
+//         $html = '<html dir="rtl" lang="ar"><body><h1 style="text-align:right;">مرحبا</h1><p style="text-align:right;">هذا نص عربي في PDF باستخدام mPDF</p></body></html>';
 
+//         $mpdf = new Mpdf([
+//             'mode' => 'utf-8',
+//             'format' => 'A4',
+//             'default_font' => 'amiri',
+//             'autoScriptToLang' => true,
+//             'autoLangToFont' => true,
+//         ]);
 
-
-public function exportPdf(Mahdar $mahdar) {
-    $pdf = Pdf::loadView('user.pdf', [
-        'mahdar' => $mahdar,
-        'arabicFont' => true
-    ]);
-    
-    // Critical DOMPDF settings
-    $pdf->setOption('defaultFont', 'Amiri');
-    $pdf->setOption('isRemoteEnabled', true); // Allows loading Google Fonts
-    $pdf->setOption('isHtml5ParserEnabled', true);
-    
-    return $pdf->download('محضر-اجتماع-' . $mahdar->id . '.pdf');
-}
+//         $mpdf->WriteHTML($html);
+//         return response($mpdf->Output(), 200, [
+//             'Content-Type' => 'application/pdf',
+//         ]);
+//     }
 }
