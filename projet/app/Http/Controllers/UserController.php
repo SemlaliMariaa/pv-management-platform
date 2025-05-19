@@ -286,18 +286,50 @@ public function synthese(Mahdar $mahdar)
 
 
 
-
-public function exportPdf(Mahdar $mahdar) {
-    $pdf = Pdf::loadView('user.pdf', [
-        'mahdar' => $mahdar,
-        'arabicFont' => true
-    ]);
+public function generateReport()
+{
+    $user = Auth::user();
+    $members = MeetingMember::where('mahdar_id', $user->id)->get();
+    $needs = Need::where('mahdar_id', $user->id)->get();
     
-    // Critical DOMPDF settings
-    $pdf->setOption('defaultFont', 'Amiri');
-    $pdf->setOption('isRemoteEnabled', true); // Allows loading Google Fonts
-    $pdf->setOption('isHtml5ParserEnabled', true);
-    
-    return $pdf->download('محضر-اجتماع-' . $mahdar->id . '.pdf');
+    return view('user.rapport', compact('user', 'members', 'needs'));
 }
+
+
+
+
+public function generateArabicPDF()
+{
+    $user = Auth::user();
+    $members = MeetingMember::where('mahdar_id', $user->id)->get();
+    $needs = Need::where('mahdar_id', $user->id)->get();
+
+    $pdf = Pdf::loadView('user.pdf', compact('user', 'members', 'needs'))
+        ->setPaper('A4', 'portrait')
+        ->setOption('defaultFont', 'Amiri')
+        ->setOption('isHtml5ParserEnabled', true)
+        ->setOption('isRemoteEnabled', true)
+        ->setOption('isFontSubsettingEnabled', true)
+        ->setOption('isPhpEnabled', true);
+
+    return $pdf->download('meeting_report_'.now()->format('Y-m-d').'.pdf');
+}
+
+
+// public function generateArabicPDF()
+// {
+//     $user = Auth::user();
+//     $members = MeetingMember::where('mahdar_id', $user->id)->get();
+//     $needs = Need::where('mahdar_id', $user->id)->get();
+    
+//     $pdf = PDF::loadView('user.pdf', compact('user', 'members', 'needs'))
+//                 ->setPaper('a4', 'portrait')
+//                 ->setOptions([
+//                     'isHtml5ParserEnabled' => true,
+//                     'isRemoteEnabled' => true,
+//                     'defaultFont' => 'Arial'
+//                 ]);
+    
+//     return $pdf->download('meeting_report_'.now()->format('Y-m-d').'.pdf');
+// }
 }

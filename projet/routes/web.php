@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/meeting-members/{meetingMember}', [UserController::class, 'editM'])->name('meeting-members.edit');
         Route::patch('/meeting-members/{meetingMember}', [UserController::class, 'updateM'])->name('meeting-members.update');
         Route::delete('/meeting-members/{meetingMember}', [UserController::class, 'destroyM'])->name('meeting-members.destroy');
+        Route::get('/meeting/report', [UserController::class, 'generateReport'])->name('meeting.report');
         // gestion needs
 
 Route::get('/needs', [UserController::class, 'indexN'])->name('needs.index');
@@ -42,7 +43,6 @@ Route::get('/needs', [UserController::class, 'indexN'])->name('needs.index');
 // pdf
 Route::get('/mahdars/{mahdar}/synthese', [UserController::class, 'synthese'])
      ->name('mahdars.synthese');
-     Route::get('/mahdars/{mahdar}/pdf', [UserController::class, 'exportPdf'])
-     ->name('mahdars.export-pdf');
+     Route::get('/test-pdf-arabe', [UserController::class, 'generateArabicPDF'])->name('pdf');
     });
 });
