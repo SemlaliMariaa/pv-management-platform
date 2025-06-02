@@ -18,6 +18,7 @@
         <table class="min-w-full bg-white border border-gray-300 rounded shadow">
             <thead>
                 <tr>
+                    <!--  -->
                     <th class="py-2 px-4 border-b">الاسم الكامل</th>
                     <th class="py-2 px-4 border-b">البريد الإلكتروني</th>
                     <th class="py-2 px-4 border-b">الهاتف</th>
