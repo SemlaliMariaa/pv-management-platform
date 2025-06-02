@@ -14,19 +14,16 @@ class Mahdar extends Model
         'user_id'
     ];
 
-    // Relation avec le créateur
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relation avec les participants
     public function participants()
     {
         return $this->hasMany(MeetingMember::class);
     }
 
-    // Relation avec les besoins
     public function needs()
     {
         return $this->hasMany(Need::class);

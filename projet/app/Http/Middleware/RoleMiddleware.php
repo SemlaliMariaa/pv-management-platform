@@ -14,6 +14,6 @@ class RoleMiddleware
             return $next($request);
         }
 
-        return abort(404); // or 403 if you prefer
+        return abort(404);
     }
 }

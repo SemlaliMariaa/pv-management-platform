@@ -14,7 +14,6 @@ class RegisterController extends Controller
         return view('auth.Register');
     }
 
-    // Traiter l'inscription
     public function register(Request $request)
     {
         $request->validate([

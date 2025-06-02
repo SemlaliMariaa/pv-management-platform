@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function rejectUser($id)
     {
         $user = User::findOrFail($id);
-        $user->delete();  // أو تقدر تعطل الحساب بطريقة أخرى
+        $user->delete();
 
         return redirect()->back()->with('success', 'المستخدم تم رفضه وحذفه');
     }

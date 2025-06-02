@@ -22,15 +22,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    // ===== ADD THESE SECTIONS IF MISSING =====
-    // 'providers' => [
-    //     // ... Other Service Providers
-    //     Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
-    // ],
 
-    // 'aliases' => [
-    //     // ... Other Facades
-    //     'PDF' => Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::class,
-    // ],
 
 ];

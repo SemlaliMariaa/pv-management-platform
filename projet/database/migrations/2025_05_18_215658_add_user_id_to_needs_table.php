@@ -13,7 +13,7 @@ class AddUserIdToNeedsTable extends Migration
                   ->nullable()
                   ->constrained('users')
                   ->onDelete('set null')
-                  ->after('mahdar_id'); // Position optionnelle
+                  ->after('mahdar_id');
         });
     }
 

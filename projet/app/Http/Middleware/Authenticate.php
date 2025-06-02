@@ -12,7 +12,7 @@ class Authenticate
      public function handle(Request $request, Closure $next)
     {
         if (Auth::guest()) {
-            return redirect()->route('loginform'); // make sure this route exists
+            return redirect()->route('loginform');
         }
 
         return $next($request);

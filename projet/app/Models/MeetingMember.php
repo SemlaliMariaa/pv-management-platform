@@ -14,13 +14,11 @@ class MeetingMember extends Model
         'signature'
     ];
 protected $table = 'meeting_users';
-    // Relation avec le PV
     public function mahdar()
     {
         return $this->belongsTo(Mahdar::class);
     }
 
-    // Relation avec l'utilisateur
     public function user()
     {
         return $this->belongsTo(User::class);

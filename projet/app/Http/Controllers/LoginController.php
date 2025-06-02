@@ -14,7 +14,6 @@ class LoginController extends Controller
         return view('auth.Login');
     }
 
-    // Traiter la connexion
    public function login(Request $request)
 {
     $credentials = $request->validate([
@@ -27,15 +26,13 @@ class LoginController extends Controller
 
         $user = Auth::user();
 
-        // ✅ التحقق واش مقبول
         if (!$user->is_approved) {
-            Auth::logout(); // نخرجوه
+            Auth::logout();
             return back()->withErrors([
                 'message' => 'حسابك مازال ما تمش تأكيده من طرف الإدارة.',
             ]);
         }
 
-        // ✅ التوجيه حسب الدور
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         } else {
@@ -51,7 +48,6 @@ class LoginController extends Controller
 
 
 
-    // Déconnexion
     public function logout(Request $request)
     {
         Auth::logout();

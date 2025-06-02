@@ -17,7 +17,6 @@ class Need extends Model
         'quantity_required'
     ];
 
-    // Relation avec le PV
     public function mahdar()
     {
         return $this->belongsTo(Mahdar::class);

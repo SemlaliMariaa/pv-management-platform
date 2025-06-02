@@ -21,13 +21,11 @@ class User extends Authenticatable
         'is_approved'
     ];
 
-    // Relation avec les PVs créés
     public function mahdars()
     {
         return $this->hasMany(Mahdar::class);
     }
 
-    // Relation avec les participations aux réunions
     public function meetingParticipations()
     {
         return $this->hasMany(MeetingMember::class);
