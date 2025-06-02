@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mahdar extends Model
 {
     use HasFactory;
+    
 
     protected $fillable = [
         'title',
@@ -29,3 +30,4 @@ class Mahdar extends Model
         return $this->hasMany(Need::class);
     }
 }
+// 
