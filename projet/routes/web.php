@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/admin/approve-user/{id}', [AdminController::class, 'approveUser'])->name('admin.approveUser');
         Route::post('/admin/reject-user/{id}', [AdminController::class, 'rejectUser'])->name('admin.rejectUser');
     });
-
+// 
     Route::middleware('role:user')->prefix('user')->group(function () {
         Route::get('/dashboard',[UserController::class,'showMeetingNote'])->name('user.dashboard');
         Route::get('/meeting-members/create', [UserController::class, 'create'])->name('meeting-members.create');
